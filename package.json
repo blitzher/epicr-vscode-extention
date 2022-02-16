@@ -2,6 +2,7 @@
     "name": "rcp",
     "displayName": "epicr-language",
     "description": "Language support for the Epicr language",
+	"repository" : "https://github.com/blitzher/epicr-vscode-extention",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.64.0"
