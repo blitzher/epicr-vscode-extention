@@ -1,0 +1,115 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Epicr",
+  "patterns": [
+    {
+      "include": "#numeric"
+    },
+    {
+      "include": "#function"
+    },
+    {
+      "include": "#unit"
+    },
+    {
+      "include": "#reserved-words"
+    }
+  ],
+  "repository": {
+    "module": {
+      "match": "([\\w-]+?)(\\.)",
+      "name": "constant.character.module",
+      "captures": {
+        "1": {
+          "name": "constant.character.module.name"
+        },
+        "2": {
+          "name": "constant.numeric.module.dot"
+        }
+      }
+    },
+    "function": {
+      "begin": "\\s*with\\(([\\w,\\s\\(\\)]*)\\)\\s*?(?:using\\(([\\w,\\s]+)\\))?:",
+      "end": "\\s*(?=(?:with|done)[\\(:])",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "match": "with|using",
+              "name": "entity.name.function"
+            },
+            {
+              "include": "#function-params"
+            }
+          ]
+        }
+      },
+      "patterns": [
+        {
+          "include": "#function-content"
+        }
+      ]
+    },
+    "function-content": {
+      "begin": "(?<=\\):)\\s*$",
+      "end": "^\\s+(?=with|done)",
+      "patterns": [
+        {
+          "include": "#unit"
+        },
+        {
+          "include": "#ingredient-ref"
+        },
+        {
+          "match": "\\s*yield:",
+          "name": "entity.name.function"
+        }
+      ]
+    },
+    "function-params": {
+      "match": "(\\w[\\w\\s]+)(\\(\\w+\\))?",
+      "captures": {
+        "1": {
+          "name": "constant.character"
+        }
+      }
+    },
+    "colon": {
+      "disabled": 0,
+      "match": ":",
+      "name": "meta.property-list.css.epicr.colon"
+    },
+    "reserved-words": {
+      "match": "\\b(title|description|amount|cook time|tags|ingredients|kitchenware|procedure|done|yield)\\b",
+      "name": "support.type.property-name.css.epicr"
+    },
+    "unit": {
+      "match": "\\(\\d+(\\.\\d+)?[\\s\\w]*\\)",
+      "name": "keyword.control.unit.css.epicr"
+    },
+    "ingredient-ref": {
+      "match": "\\[([\\w\\s]+)(:[\\w\\s]+)?\\]",
+      "name": "keyword.control.unit.css.epicr",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "match": "\\[([\\w\\s]+):([\\w\\s]+)\\]",
+              "captures": {
+                "1": { "name": "markup.italic" },
+                "2": { "name": "constant.character" }
+              }
+            },
+            {
+              "match": "\\[([\\w\\s]+)\\]",
+              "captures": {
+                "1": { "name": "constant.character" }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "scopeName": "source.rcp"
+}
