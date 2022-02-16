@@ -1,5 +1,6 @@
 {
     "name": "rcp",
+	"publisher": "Skovborg",
     "displayName": "epicr-language",
     "description": "Language support for the Epicr language",
 	"repository" : "https://github.com/blitzher/epicr-vscode-extention",
